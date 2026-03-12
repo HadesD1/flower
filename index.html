@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Flower Animation</title>
+    <style>
+        /* Toàn bộ hiệu ứng nằm ở đây */
+        :root {
+            --bg-color: #000;
+            --flower-color: #319197;
+            --glow-color: rgba(49, 145, 151, 0.5);
+            --speed: 4s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .night {
+            position: fixed;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            filter: blur(0.1vmin);
+        }
+
+        .flower {
+            position: absolute;
+            bottom: 10vmin;
+            transform-origin: bottom center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: moving-flower var(--speed) linear infinite;
+        }
+
+        .flower__line {
+            width: 1.5vmin;
+            height: 60vmin;
+            background-image: linear-gradient(to top, rgba(0,0,0,0), #104d4a, var(--flower-color));
+            box-shadow: 0 0 1vmin var(--glow-color);
+            border-radius: 4vmin;
+        }
+
+        /* Tạo cánh hoa */
+        .f-wrapper {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-80%);
+            width: 15vmin;
+            height: 15vmin;
+        }
+
+        .flower__leaf {
+            position: absolute;
+            left: 50%;
+            bottom: 2vmin;
+            transform: translateX(-50%);
+            width: 5vmin;
+            height: 12vmin;
+            background-image: linear-gradient(to top, var(--flower-color), #fff);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 2vmin var(--flower-color);
+            opacity: 0.9;
+            transform-origin: bottom center;
+        }
+
+        /* Xếp các cánh hoa thành vòng tròn */
+        .flower__leaf--1 { transform: translateX(-50%) rotate(0deg); }
+        .flower__leaf--2 { transform: translateX(-50%) rotate(60deg); }
+        .flower__leaf--3 { transform: translateX(-50%) rotate(-60deg); }
+        .flower__leaf--4 { transform: translateX(-50%) rotate(120deg); }
+        .flower__leaf--5 { transform: translateX(-50%) rotate(-120deg); }
+        .flower__leaf--6 { transform: translateX(-50%) rotate(180deg); }
+
+        .flower__white-circle {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4vmin;
+            height: 4vmin;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 3vmin #fff;
+        }
+
+        @keyframes moving-flower {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Các đốm sáng lấp lánh (Dots) */
+        .dot {
+            position: absolute;
+            width: 0.5vmin;
+            height: 0.5vmin;
+            background-color: #f7ff18;
+            border-radius: 50%;
+            filter: blur(0.05vmin);
+            animation: glowing-dot 3s ease-in-out infinite;
+        }
+
+        @keyframes glowing-dot {
+            0%, 100% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-10vmin); }
+        }
+    </style>
+</head>
+<body>
+    <div class="night">
+        <div class="dot" style="top: 20%; left: 30%;"></div>
+        <div class="dot" style="top: 40%; left: 70%;"></div>
+        <div class="dot" style="top: 10%; left: 50%;"></div>
+    </div>
+
+    <div class="flower">
+        <div class="flower__line"></div>
+        <div class="f-wrapper">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__white-circle"></div>
+        </div>
+    </div>
+</body>
+</html>

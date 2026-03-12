@@ -1,0 +1,33 @@
+body {
+    background-color: #000; /* Nền đen để hoa nổi bật */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.flower {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: moving-flower-1 4s linear infinite;
+    transform-origin: bottom center;
+}
+
+.flower__line {
+    width: 2vmin;
+    height: 50vmin; /* Thân hoa */
+    background-image: linear-gradient(to top, #000, #104d4a, #23966a);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Hiệu ứng đung đưa */
+@keyframes moving-flower-1 {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+/* Bạn có thể thêm các class .flower__leaf để tạo cánh hoa tròn bằng border-radius: 50% */
